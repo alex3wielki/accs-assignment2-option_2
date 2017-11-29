@@ -19,13 +19,16 @@
   </style>
 </head>
 
-<body>
-  <button>Locate me!</button>
-  <h1>Press "F" to find yourself, or "L" to locate yourself</h1>
-  <h2>You can also just say "Find me", or "Where the
-    <strong>fuck</strong> am I?!" to learn where the
-    <strong>fuck</strong> you are</h2>
-  <div id="map"></div>
+<body class="container">
+    <h1>Press "F" to find yourself, or "L" to locate yourself</h1>
+      <h2>You can also just say "Find me", or "Where the <strong>fuck</strong> am I?!" to learn where the <strong>fuck</strong> you are</h2>
+        <button type="button" class="btn btn-primary">Locate me!</button>
+
+        <h3> Here is the map of where you are! </h3>
+        <div id="map">
+        </div>
+        
+  <!-- Added in all of our script -->    
   <script src="./appAlex.js"></script>
   <script async defer src="https://maps.googleapis.com/maps/api/js?key= AIzaSyAL1riTbssWzSBtySctopB9I8wY_OXk0og &callback=initMap"></script>
   <script src="./appSarah.js"></script>

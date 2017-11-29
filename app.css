@@ -1,0 +1,20 @@
+.container {
+    background: lightblue;
+    margin: auto 0;
+    padding: 50px;
+}
+#map {
+    border: solid 3px red;
+}
+
+button {
+    padding: 20px;
+}
+
+h1, h2 {
+    color: purple !important;
+}
+h3 {
+    color: red !important;
+}
+
