@@ -11,7 +11,6 @@
  */
 
 let Url = "https://ipinfo.io/json";
-// let Url = "https://api.github.com/users/alex3wielki";
 async function getInfo(url) {
   const response = await fetch(url);
   // console.log(response);
@@ -20,6 +19,22 @@ async function getInfo(url) {
 }
 let ipInfo = getInfo(Url);
 console.log(ipInfo);
+
+//Google maps
+function initMap() {
+  var uluru = {
+    lat: -25.363,
+    lng: 131.044
+  };
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: uluru
+  });
+  var marker = new google.maps.Marker({
+    position: uluru,
+    map: map
+  });
+}
 
 /**
  *  Fetching stuff. Does the same thing as getInfo();
