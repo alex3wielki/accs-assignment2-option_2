@@ -1,4 +1,9 @@
 /**
+ * ---------------------------------Table of Contents---------------------------------
+ * First API: Key Detection for Locating function
+ * Second API: Speech Synthetis to tell user how to locate themselves
+ * Last API: Speech recognition for users to easily say find me and be shown on the map
+ * ----------------------------------------------------------------------------------------------
  * This app detects your IP address and shows your location using Google Maps
  * using
  *  Google Maps API https://developers.google.com/maps/ //Alex
@@ -35,3 +40,16 @@
 //       // This is where you run code if the server returns any errors
 //     });
 // }
+
+
+// ----------------FIRST: Function for key detection----------------
+
+window.addEventListener('keydown', function(press) {
+    // when "l" and "f" is pressed down, function findMe will be called
+    if (press.key == "l" || press.key == "f")
+        {
+            console.log("press");
+            // findMe();
+        }
+});
+
