@@ -17,26 +17,27 @@ async function getInfo(url) {
   const data = await response.json();
   return data;
 }
-let ipInfo = getInfo(Url);
-console.log(ipInfo);
+let ipInfo = getInfo(Url).then(function(){
+  console.log(ipInfo);  
+});
 
 //Google maps
 function initMap() {
-  var uluru = {
-    lat: -25.363,
+  var place = {
+    // lat: ,
     lng: 131.044
   };
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 4,
-    center: uluru
+    center: place
   });
   var marker = new google.maps.Marker({
-    position: uluru,
+    position: place,
     map: map
   });
 }
 
-// initMap();
+
 /**
  *  Fetching stuff. Does the same thing as getInfo();
  */
