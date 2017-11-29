@@ -5,8 +5,9 @@
  *  ipinfo API https://ipinfo.io/developers //Alex
  *  Speech recognition. //Sarah
  *  Keypress detection //Sarah
- *  Language detection //Alex
- *  Region highlight //?
+ *  Speech synth //Sarah
+//  *  Language detection //Alex
+//  *  Region highlight //Alex
  */
 
 let Url = "https://ipinfo.io/json";
@@ -15,22 +16,22 @@ async function getInfo(url) {
   const response = await fetch(url);
   // console.log(response);
   const data = await response.json();
-  console.log(data);
   return data;
 }
 let ipInfo = getInfo(Url);
+console.log(ipInfo);
 
-
-fetch(Url) // Call the fetch function passing the url of the API as a parameter
-  .then(function (response) {
-    return response.json();
-  }).then(function (data) {
-    console.log(data);
-  })
-  .catch(function () {
-    // This is where you run code if the server returns any errors
-  });
-
-// $.getJSON(Url, function(data){
-//   console.log(data)
-// })
+/**
+ *  Fetching stuff. Does the same thing as getInfo();
+ */
+function getInfo() {
+  fetch(Url) // Call the fetch function passing the url of the API as a parameter
+    .then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log(data);
+    })
+    .catch(function () {
+      // This is where you run code if the server returns any errors
+    });
+}
