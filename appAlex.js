@@ -36,7 +36,7 @@ function initMap() {
   });
 }
 
-initMap();
+// initMap();
 /**
  *  Fetching stuff. Does the same thing as getInfo();
  */
