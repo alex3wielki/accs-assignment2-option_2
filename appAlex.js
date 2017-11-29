@@ -13,18 +13,16 @@
 let Url = "https://ipinfo.io/json";
 async function getInfo(url) {
   const response = await fetch(url);
-  // console.log(response);
-  const data = await response.json();
-  return data;
+  return await response.json();
 }
-let ipInfo = getInfo(Url).then(function(){
-  console.log(ipInfo);  
-});
+
+getInfo(Url)
+  .then(ipInfo => console.log(ipInfo));
 
 //Google maps
 function initMap() {
   var place = {
-    // lat: ,
+    lat: -25.363,
     lng: 131.044
   };
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -36,6 +34,7 @@ function initMap() {
     map: map
   });
 }
+
 
 
 /**
