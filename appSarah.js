@@ -71,5 +71,42 @@ function determineWhatToSay(key) {
 };
 
 // ----------------LAST: Function for Speech Recognition----------------
-
 // creating a function that hear
+    
+// set up the speecg regcognition
+    window.SpeechRecognition =
+        window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    const speak = new SpeechRecognition();
+    speak.interimResults = true; 
+    speak.lang = "en-US";
+    // speak.continuous = false; //sets a single result for the one recogonition
+    // speak.maxAlternatives = 1; // sets the number of potential matches that should be returned
+
+    // setting a event to listen for the words find me
+    speak.addEventListener("result", e => {
+        // speak.start();
+        const transcript = e.results[0][0].transcript;
+        console.log(transcript);
+        document.body.insertAdjacentHTML('beforeEnd', `<p>${transcript}</p>`)
+        
+    });
+    
+    // on result, use function to find them on the map and output results
+
+    // speak.onresult = function(e) {
+    //     const findThem = event.results[0][0].transcript;
+    //     console.log('You are: ' + location);
+    //     //show them on map where they are
+    // };
+    speak.addEventListener("end", speak.start);
+    speak.start();
+
+    // set an error function when the user is not heard, or the grammar is wrong.
+
+    // recognition.onerror = function(event) {
+    //     diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
+    //   }
+
+   
+
