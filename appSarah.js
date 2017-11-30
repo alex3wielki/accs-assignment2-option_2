@@ -44,14 +44,13 @@
 
 // ----------------FIRST: Function for key detection----------------
 
-window.addEventListener('keydown', function(press) {
+window.addEventListener('keydown', function (press) {
     // when "l" and "f" is pressed down, function findMe will be called
-    if (press.key == "l" || press.key == "f")
-        {
-            console.log("press");
-            determineWhatToSay(press.key);
-            // findMe();
-        }
+    if (press.key == "l" || press.key == "f") {
+        console.log("press");
+        determineWhatToSay(press.key);
+        // findMe();
+    }
 });
 
 // ----------------SECOND: Function for Speech Synthesis----------------
@@ -63,50 +62,51 @@ function determineWhatToSay(key) {
     // to be sure that when the key is pressed multiple times, the line is only said once when the key is pressed once. 
     window.speechSynthesis.cancel();
     window.speechSynthesis.resume();
-        if (key == "f")
-            lookSpeech.text = "Hold on, I am trying to find you";
-        else if (key == "l")
-            lookSpeech.text = "Hold on, I am trying to locate you";
-        speechSynthesis.speak(lookSpeech);    
+    if (key == "f") {
+        lookSpeech.text = "Hold on, I am trying to find you";
+        findMe();
+    } else if (key == "l") {
+        lookSpeech.text = "Hold on, I am trying to locate you";
+        findMe();
+    }
+
+    speechSynthesis.speak(lookSpeech);
 };
 
 // ----------------LAST: Function for Speech Recognition----------------
 // creating a function that hear
-    
+
 // set up the speecg regcognition
-    window.SpeechRecognition =
-        window.SpeechRecognition || window.webkitSpeechRecognition;
+window.SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
-    const speak = new SpeechRecognition();
-    speak.interimResults = true; 
-    speak.lang = "en-US";
-    // speak.continuous = false; //sets a single result for the one recogonition
-    // speak.maxAlternatives = 1; // sets the number of potential matches that should be returned
+const speak = new SpeechRecognition();
+speak.interimResults = true;
+speak.lang = "en-US";
+// speak.continuous = false; //sets a single result for the one recogonition
+// speak.maxAlternatives = 1; // sets the number of potential matches that should be returned
 
-    // setting a event to listen for the words find me
-    speak.addEventListener("result", e => {
-        // speak.start();
-        const transcript = e.results[0][0].transcript;
-        console.log(transcript);
-        document.body.insertAdjacentHTML('beforeEnd', `<p>${transcript}</p>`)
-        
-    });
-    
-    // on result, use function to find them on the map and output results
+// setting a event to listen for the words find me
+speak.addEventListener("result", e => {
+    // speak.start();
+    const transcript = e.results[0][0].transcript;
+    console.log(transcript);
+    document.body.insertAdjacentHTML('beforeEnd', `<p>${transcript}</p>`)
 
-    // speak.onresult = function(e) {
-    //     const findThem = event.results[0][0].transcript;
-    //     console.log('You are: ' + location);
-    //     //show them on map where they are
-    // };
-    speak.addEventListener("end", speak.start);
-    speak.start();
+});
 
-    // set an error function when the user is not heard, or the grammar is wrong.
+// on result, use function to find them on the map and output results
 
-    // recognition.onerror = function(event) {
-    //     diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
-    //   }
+// speak.onresult = function(e) {
+//     const findThem = event.results[0][0].transcript;
+//     console.log('You are: ' + location);
+//     //show them on map where they are
+// };
+speak.addEventListener("end", speak.start);
+speak.start();
 
-   
+// set an error function when the user is not heard, or the grammar is wrong.
 
+// recognition.onerror = function(event) {
+//     diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
+//   }
