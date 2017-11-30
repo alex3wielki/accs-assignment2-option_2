@@ -12,7 +12,7 @@
 
 //  I am getting lost with functions again so I'll make it look like C++. Maybe it'll help me.
 function Main() {
-  findMe();
+  // findMe();
 }
 
 // Calling the Main. Nothing more. All logic is happening in Main();
@@ -36,7 +36,8 @@ function findMe() {
       // console.log(lattitude); // DEBUGGING
       let lng = ipInfo.loc.slice(8, 15);
       // console.log(lng); // DEBUGGING
-      map.map.setCenter(new google.maps.LatLng(45, 19)).setCenter({
+      // console.log(map);
+      map.setCenter({
         // I think the console is lost because map.map is a Google maps API property, therefore I get an error
         lat: parseFloat(lattitude),
         lng: parseFloat(lng)
@@ -50,12 +51,13 @@ function findMe() {
  */
 function initMap() {
   var place = {
-    // lat: -25.363,
-    // lng: 131.044
-    lat: 44.4001,
-    lng: -79.666
+    lat: -25.363,
+    lng: 131.044
+    // lat: 44.4001,
+    // lng: -79.666
   };
-  map = new google.maps.Map(document.getElementById('map'), { // I made it a global so I can use it in out events
+  map = new google.maps.Map(document.getElementById('map'), {
+    // I made it a global so I can use it in out events
     zoom: 4,
     center: place
   });
