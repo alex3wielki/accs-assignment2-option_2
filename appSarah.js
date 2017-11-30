@@ -49,7 +49,7 @@ window.addEventListener('keydown', function (press) {
     if (press.key == "l" || press.key == "f") {
         console.log("press");
         determineWhatToSay(press.key);
-        // findMe();
+        findMe();
     }
 });
 
@@ -82,7 +82,7 @@ window.SpeechRecognition =
 
 const speak = new SpeechRecognition();
 speak.interimResults = true;
-speak.lang = "en-US";
+speak.lang = "en-US"; // maybe don't need this?
 // speak.continuous = false; //sets a single result for the one recogonition
 // speak.maxAlternatives = 1; // sets the number of potential matches that should be returned
 
@@ -104,6 +104,11 @@ speak.addEventListener("result", e => {
 // };
 speak.addEventListener("end", speak.start);
 speak.start();
+
+speak.onspeechend = function(e) {
+    speak.stop();
+}
+
 
 // set an error function when the user is not heard, or the grammar is wrong.
 
