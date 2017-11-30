@@ -10,22 +10,52 @@
 //  *  Region highlight //Alex
  */
 
+//  I am getting lost with functions again so I'll make it look like C++. Maybe it'll help me.
+function Main() {
+  findMe();
+}
+
+// Calling the Main. Nothing more. All logic is happening in Main();
+document.addEventListener("DOMContentLoaded", function () {
+  Main();
+})
+
+// Grabbing the location
 let Url = "https://ipinfo.io/json";
 async function getInfo(url) {
   const response = await fetch(url);
   return await response.json();
 }
 
-getInfo(Url)
-  .then(ipInfo => console.log(ipInfo));
+// Changing the location
+function findMe() {
+  getInfo(Url)
+    .then(ipInfo => {
+      ipInfo;
+      let lattitude = ipInfo.loc.slice(0, 7);
+      // console.log(lattitude); // DEBUGGING
+      let lng = ipInfo.loc.slice(8, 15);
+      // console.log(lng); // DEBUGGING
+      map.map.setCenter(new google.maps.LatLng(45, 19)).setCenter({
+        // I think the console is lost because map.map is a Google maps API property, therefore I get an error
+        lat: parseFloat(lattitude),
+        lng: parseFloat(lng)
+      });
+    });
+}
 
-//Google maps
+/**
+ * Init map from Google maps
+ * //Google maps
+ */
 function initMap() {
   var place = {
-    lat: -25.363,
-    lng: 131.044
+    // lat: -25.363,
+    // lng: 131.044
+    lat: 44.4001,
+    lng: -79.666
   };
-  var map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), { // I made it a global so I can use it in out events
     zoom: 4,
     center: place
   });
@@ -34,7 +64,6 @@ function initMap() {
     map: map
   });
 }
-
 
 
 /**
