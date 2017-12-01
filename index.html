@@ -20,6 +20,16 @@
 </head>
 
 <body class="container">
+  <form>
+    <div class="form-group">
+      <label for="langDetection">What language is this?</label><br>
+      <input type="text" id="langDetection">
+      </input>
+      <button id="langDetectionBtn" class="btn btn-primary my-auto">Check language</button>
+      <p id="langDetectionResult"></p>
+    </div>
+  </form>
+
   <h1>Press "F" to find yourself, or "L" to locate yourself</h1>
   <h2>You can also just say "Find me", "Locate me", or "Where am I?!" to learn where the you are</h2>
   <button type="button" id="locate" class="btn btn-primary">Locate me!</button>
@@ -27,6 +37,7 @@
   <h3> Here is the map of where you are! </h3>
   <div id="map">
   </div>
+
 
   <!-- Added in all of our script -->
   <footer>

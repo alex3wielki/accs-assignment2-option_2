@@ -12,8 +12,7 @@
  *  ^^^ (Works on Chrome. Problems on Firefox. Probably not supported yet: https://caniuse.com/#feat=speech-recognition)
  *  Keypress detection //Sarah
  *  Speech synth //Sarah
-//  *  Language detection //Alex
-//  *  Region highlight //Alex
+ *  Language detection //Alex
  */
 
 //  I am getting lost with functions again so I'll make it look like C++. Maybe it'll help me.
@@ -97,7 +96,6 @@ function initMap() {
 
 // On click
 document.querySelector("#locate").addEventListener('click', function () {
-  console.log('test');
   Speak("I'm trying to locate you");
   findMe();
 })
@@ -117,4 +115,8 @@ function getInfo2() {
     .catch(function (err) {
       console.log(err);
     });
+}
+
+function detectLang(){
+  fetch()
 }

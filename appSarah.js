@@ -22,10 +22,10 @@
 window.addEventListener('keydown', function (press) {
     // when "f" is pressed the first string is spoken, else if "l" is pressed the second string is spoken. 
     // when "l" and "f" is pressed down, function findMe will be called
-    if (press.key == "l") {
+    if (press.key == "l" || press.key == "L") {
         Speak("Hold on, I am trying to locate you");
         findMe();
-    } else if (press.key == "f") {
+    } else if (press.key == "f" || press.key == "F") {
         Speak("Hold on, I am trying to find you");
         findMe();
     }
