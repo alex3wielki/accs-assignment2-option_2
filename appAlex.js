@@ -1,5 +1,5 @@
 /**
- * This app detects your IP address and shows your location using Google Maps
+ * This app detects your IP address and shows your location on a  Google Map
  * using
  *  Google Maps API https://developers.google.com/maps/ //Alex
  *  ipinfo API https://ipinfo.io/developers //Alex
@@ -33,15 +33,22 @@ function findMe() {
     .then(ipInfo => {
       ipInfo;
       let lattitude = ipInfo.loc.slice(0, 7);
-      // console.log(lattitude); // DEBUGGING
       let lng = ipInfo.loc.slice(8, 15);
-      // console.log(lng); // DEBUGGING
-      // console.log(map);
+      map.setZoom(13);
       map.setCenter({
         // I think the console is lost because map.map is a Google maps API property, therefore I get an error
         lat: parseFloat(lattitude),
         lng: parseFloat(lng)
       });
+      let place = {
+        lat: parseFloat(lattitude),
+        lng: parseFloat(lng)
+      }
+      let marker = new google.maps.Marker({
+        position: place,
+        map: map
+      });
+      // map.panTo(curmarker.position);
     });
 }
 
