@@ -34,7 +34,7 @@ window.addEventListener('keydown', function (press) {
 /** SECOND: Function for Speech Synthesis
  * A function which lets us just say stuff and save code
  * 
- * @param {any} whatToSay 
+ * @param {string} whatToSay 
  */
 function Speak(whatToSay) {
     const lookSpeech = new SpeechSynthesisUtterance();
