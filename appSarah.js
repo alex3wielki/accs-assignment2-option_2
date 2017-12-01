@@ -12,8 +12,7 @@
  *  ^^^ (Works on Chrome. Problems on Firefox. Probably not supported yet: https://caniuse.com/#feat=speech-recognition)
  *  Keypress detection //Sarah
  *  Speech synth //Sarah
-//  *  Language detection //Alex
-//  *  Region highlight //Alex
+ *  Language detection //Alex
  * Ajax fetching is happening in appAlex.js
  */
 

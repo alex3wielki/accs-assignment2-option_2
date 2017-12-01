@@ -17,7 +17,17 @@
 
 //  I am getting lost with functions again so I'll make it look like C++. Maybe it'll help me.
 function Main() {
-  // findMe();
+  // On click
+  document.querySelector("#locate").addEventListener('click', function () {
+    Speak("I'm trying to locate you");
+    findMe();
+  })
+  let langInput = document.getElementById('langDetection');
+  langInput.value = "Dzień dobry";
+  document.getElementById('langDetectionBtn').addEventListener('click', function (e) {
+    e.preventDefault();
+    detectLang(langInput.value);
+  })
 }
 
 // Calling the Main. Nothing more. All logic is happening in Main();
@@ -29,7 +39,7 @@ let Url = "https://ipinfo.io/json";
 /** getInfo(url)
  * Grabbing the location using async method
  * @param {string} url
- * @returns a JSON object
+ * @returns {JSON}
  */
 async function getInfo(url) {
   const response = await fetch(url);
@@ -45,12 +55,12 @@ async function getInfo(url) {
  * 4. Center the map on the user.
  * 5. Set the zoom
  * 6. Put the marker down. (For some reason didn't do it automatically);
- * @return {void};
+ * @returns {void};
  */
 function findMe() {
   getInfo(Url)
     .then(ipInfo => {
-      ipInfo;
+      // ipInfo;
       let lattitude = ipInfo.loc.slice(0, 7);
       let lng = ipInfo.loc.slice(8, 15);
       let place = {
@@ -94,11 +104,6 @@ function initMap() {
   });
 }
 
-// On click
-document.querySelector("#locate").addEventListener('click', function () {
-  Speak("I'm trying to locate you");
-  findMe();
-})
 
 /**
  *  Fetching stuff. Does the same thing as getInfo();
@@ -117,6 +122,21 @@ function getInfo2() {
     });
 }
 
-function detectLang(){
-  fetch()
+/** Fetches the API response as JSON
+ * I'm not sure how to take the variable outside of .then() scope
+ * therefore I'll just change the text here;
+ * @param {string} query 
+ * @returns {void}
+ */
+function detectLang(query) {
+  fetch('http://apilayer.net/api/detect?access_key=abbdb2654186ebd4033601f9ed696a1b&query=' + encodeURIComponent(query))
+    .then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      document.getElementById("langDetectionResult").textContent = data.results[0].language_name;
+    }).catch(function (err) {
+      console.log(err);
+    });
+  // console.log(lang);
+  // return lang;
 }
