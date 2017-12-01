@@ -52,14 +52,14 @@ function Speak(whatToSay) {
 window.SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const speach = new SpeechRecognition();
-speach.interimResults = false; // THIS WAS CAUSING AN ENDLESS LOOP.
-speach.lang = "en-US"; // maybe don't need this?
-speach.continuous = false; //sets a single result for the one recogonition. Evil
-// speach.maxAlternatives = 1; // sets the number of potential matches that should be returned
+const speech = new SpeechRecognition();
+speech.interimResults = false; // THIS WAS CAUSING AN ENDLESS LOOP.
+speech.lang = "en-US"; // maybe don't need this?
+speech.continuous = false; //sets a single result for the one recogonition. Evil
+// speech.maxAlternatives = 1; // sets the number of potential matches that should be returned
 
 // setting a event to listen for the words find me
-speach.addEventListener("result", e => {
+speech.addEventListener("result", e => {
     const transcript = e.results[0][0].transcript;
     // Determines if user says one of the key values
     if (transcript == 'find me') {
@@ -77,9 +77,9 @@ speach.addEventListener("result", e => {
     console.log(transcript);
 });
 
-speach.addEventListener("end", speach.start);
-speach.start();
+speech.addEventListener("end", speech.start);
+speech.start();
 
-speach.onspeechend = function (e) {
-    speach.stop();
+speech.onspeechend = function (e) {
+    speech.stop();
 }
