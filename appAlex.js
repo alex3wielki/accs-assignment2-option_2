@@ -23,7 +23,7 @@ function Main() {
     findMe();
   })
   let langInput = document.getElementById('langDetection');
-  langInput.value = "Dzień dobry";
+  langInput.value = "Dzień dobry"; // Presetting the value so the tester does not have to look for other languages
   document.getElementById('langDetectionBtn').addEventListener('click', function (e) {
     e.preventDefault();
     detectLang(langInput.value);
@@ -140,3 +140,10 @@ function detectLang(query) {
   // console.log(lang);
   // return lang;
 }
+
+// async function detectLang(query) {
+//   const response = await fetch('http://apilayer.net/api/detect?access_key=abbdb2654186ebd4033601f9ed696a1b&query=' +
+//     encodeURIComponent(query));
+//     let data = await response.json();
+//     document.getElementById("langDetectionResult").textContent = data.results[0].language_name;    
+// }
