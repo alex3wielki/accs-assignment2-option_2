@@ -2,7 +2,7 @@
  * ---------------------------------Table of Contents-------------------------------------------
  * First API: ipInfo
  * Second API: Google Maps relocation
- * Last API: Language Detection?
+ * Last API: Language Detection
  * ---------------------------------------------------------------------------------------------
  * This app detects your IP address and shows your location using Google Maps
  * using
