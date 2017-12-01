@@ -23,10 +23,10 @@ window.addEventListener('keydown', function (press) {
     // when "f" is pressed the first string is spoken, else if "l" is pressed the second string is spoken. 
     // when "l" and "f" is pressed down, function findMe will be called
     if (press.key == "l") {
-        Speak("Hold on, I am trying to find you");
+        Speak("Hold on, I am trying to locate you");
         findMe();
     } else if (press.key == "f") {
-        Speak("Hold on, I am trying to locate you");
+        Speak("Hold on, I am trying to find you");
         findMe();
     }
 });
@@ -39,7 +39,7 @@ window.addEventListener('keydown', function (press) {
 function Speak(whatToSay) {
     const lookSpeech = new SpeechSynthesisUtterance();
     lookSpeech.text = whatToSay;
-    lookSpeech.rate = 2; // setting the speed of how fast the text is being spoken
+    lookSpeech.rate = 1.5; // setting the speed of how fast the text is being spoken
     // to be sure that when the key is pressed multiple times, the line is only said once when the key is pressed once. 
     window.speechSynthesis.cancel();
     window.speechSynthesis.resume();
