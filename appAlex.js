@@ -98,6 +98,7 @@ function initMap() {
 // On click
 document.querySelector("#locate").addEventListener('click', function () {
   console.log('test');
+  Speak("I'm trying to locate you");
   findMe();
 })
 

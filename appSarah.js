@@ -39,7 +39,7 @@ window.addEventListener('keydown', function (press) {
 function Speak(whatToSay) {
     const lookSpeech = new SpeechSynthesisUtterance();
     lookSpeech.text = whatToSay;
-    lookSpeech.rate = 1.5; // setting the speed of how fast the text is being spoken
+    lookSpeech.rate = 1; // setting the speed of how fast the text is being spoken
     // to be sure that when the key is pressed multiple times, the line is only said once when the key is pressed once. 
     window.speechSynthesis.cancel();
     window.speechSynthesis.resume();
