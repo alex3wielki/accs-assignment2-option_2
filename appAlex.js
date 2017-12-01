@@ -1,8 +1,8 @@
 /**
  * ---------------------------------Table of Contents-------------------------------------------
- * First API: Ipinfo
- * Second API: Speech Synthesis to tell user how to locate themselves
- * Last API: Speech recognition for users to easily say find me and be shown on the map
+ * First API: ipInfo
+ * Second API: Google Maps relocation
+ * Last API: Language Detection?
  * ---------------------------------------------------------------------------------------------
  * This app detects your IP address and shows your location using Google Maps
  * using
@@ -74,10 +74,10 @@ function findMe() {
 
 
 /** Google maps
- * Init map function from Google Maps
+ * Init map function from Google Maps docs
  */
 function initMap() {
-  var place = {
+  let place = {
     lat: -25.363,
     lng: 131.044
     // Barrie's location
@@ -89,7 +89,7 @@ function initMap() {
     zoom: 4,
     center: place
   });
-  var marker = new google.maps.Marker({
+  let marker = new google.maps.Marker({
     position: place,
     map: map
   });
@@ -106,14 +106,14 @@ document.querySelector("#locate").addEventListener('click', function () {
  *  Making the rest of the API work with this method would require me to rebuild a couple of other functions
  *    Therefore it's just console.logging()
  */
-// function getInfo() {
-//   fetch(Url) // Call the fetch function passing the url of the API as a parameter
-//     .then(function (response) {
-//       return response.json();
-//     }).then(function (data) {
-//       console.log(data);
-//     })
-//     .catch(function (err) {
-//       console.log(err);
-//     });
-// }
+function getInfo2() {
+  fetch(Url) // Call the fetch function passing the url of the API as a parameter
+    .then(function (response) {
+      return response.json();
+    }).then(function (data) {
+      console.log(data);
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+}
