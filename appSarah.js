@@ -9,109 +9,77 @@
  *  Google Maps API https://developers.google.com/maps/ //Alex
  *  ipinfo API https://ipinfo.io/developers //Alex
  *  Speech recognition. //Sarah
+ *  ^^^ (Works on Chrome. Problems on Firefox. Probably not supported yet: https://caniuse.com/#feat=speech-recognition)
  *  Keypress detection //Sarah
  *  Speech synth //Sarah
 //  *  Language detection //Alex
 //  *  Region highlight //Alex
+ * Ajax fetching is happening in appAlex.js
  */
-
-// let Url = "https://ipinfo.io/json";
-// // let Url = "https://api.github.com/users/alex3wielki";
-// async function getInfo(url) {
-//   const response = await fetch(url);
-//   // console.log(response);
-//   const data = await response.json();
-//   return data;
-// }
-// let ipInfo = getInfo(Url);
-// console.log(ipInfo);
-
-// /**
-//  *  Fetching stuff. Does the same thing as getInfo();
-//  */
-// function getInfo() {
-//   fetch(Url) // Call the fetch function passing the url of the API as a parameter
-//     .then(function (response) {
-//       return response.json();
-//     }).then(function (data) {
-//       console.log(data);
-//     })
-//     .catch(function () {
-//       // This is where you run code if the server returns any errors
-//     });
-// }
-
 
 // ----------------FIRST: Function for key detection----------------
 
 window.addEventListener('keydown', function (press) {
+    // when "f" is pressed the first string is spoken, else if "l" is pressed the second string is spoken. 
     // when "l" and "f" is pressed down, function findMe will be called
-    if (press.key == "l" || press.key == "f") {
-        console.log("press");
-        determineWhatToSay(press.key);
+    if (press.key == "l") {
+        Speak("Hold on, I am trying to find you");
+        findMe();
+    } else if (press.key == "f") {
+        Speak("Hold on, I am trying to locate you");
         findMe();
     }
 });
 
-// ----------------SECOND: Function for Speech Synthesis----------------
-// creating a function so that when "f" is pressed the first string is spoken, else if "l" is pressed the second string is spoken. 
-
-function determineWhatToSay(key) {
+/** SECOND: Function for Speech Synthesis
+ * A function which lets us just say stuff and save code
+ * 
+ * @param {any} whatToSay 
+ */
+function Speak(whatToSay) {
     const lookSpeech = new SpeechSynthesisUtterance();
+    lookSpeech.text = whatToSay;
     lookSpeech.rate = 2; // setting the speed of how fast the text is being spoken
     // to be sure that when the key is pressed multiple times, the line is only said once when the key is pressed once. 
     window.speechSynthesis.cancel();
     window.speechSynthesis.resume();
-    if (key == "f") {
-        lookSpeech.text = "Hold on, I am trying to find you";
-        findMe();
-    } else if (key == "l") {
-        lookSpeech.text = "Hold on, I am trying to locate you";
-        findMe();
-    }
-
     speechSynthesis.speak(lookSpeech);
 };
 
 // ----------------LAST: Function for Speech Recognition----------------
-// creating a function that hear
-
-// set up the speecg regcognition
+// creating a function that listens
+// set up the speech regcognition
 window.SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
 
-const speak = new SpeechRecognition();
-speak.interimResults = true;
-speak.lang = "en-US"; // maybe don't need this?
-// speak.continuous = false; //sets a single result for the one recogonition
-// speak.maxAlternatives = 1; // sets the number of potential matches that should be returned
+const speach = new SpeechRecognition();
+speach.interimResults = false; // THIS WAS CAUSING AN ENDLESS LOOP.
+speach.lang = "en-US"; // maybe don't need this?
+speach.continuous = false; //sets a single result for the one recogonition. Evil
+// speach.maxAlternatives = 1; // sets the number of potential matches that should be returned
 
 // setting a event to listen for the words find me
-speak.addEventListener("result", e => {
-    // speak.start();
+speach.addEventListener("result", e => {
     const transcript = e.results[0][0].transcript;
-    console.log(transcript);
-    document.body.insertAdjacentHTML('beforeEnd', `<p>${transcript}</p>`)
+    // Determines if user says one of the key values
+    if (transcript == 'find me') {
+        Speak("Hold on, I am trying to find you");
+        findMe();
+    } else if (transcript == 'locate me') {
+        Speak("Hold on, I am trying to locate you");
+        findMe();
+    } else if (transcript == 'where am I') {
+        Speak("Hold on, I am trying to determine where you are");
+        findMe();
+    }
 
+
+    console.log(transcript);
 });
 
-// on result, use function to find them on the map and output results
+speach.addEventListener("end", speach.start);
+speach.start();
 
-// speak.onresult = function(e) {
-//     const findThem = event.results[0][0].transcript;
-//     console.log('You are: ' + location);
-//     //show them on map where they are
-// };
-speak.addEventListener("end", speak.start);
-speak.start();
-
-speak.onspeechend = function(e) {
-    speak.stop();
+speach.onspeechend = function (e) {
+    speach.stop();
 }
-
-
-// set an error function when the user is not heard, or the grammar is wrong.
-
-// recognition.onerror = function(event) {
-//     diagnostic.textContent = 'Error occurred in recognition: ' + event.error;
-//   }

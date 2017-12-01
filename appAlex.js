@@ -1,9 +1,15 @@
 /**
- * This app detects your IP address and shows your location on a  Google Map
+ * ---------------------------------Table of Contents-------------------------------------------
+ * First API: Ipinfo
+ * Second API: Speech Synthesis to tell user how to locate themselves
+ * Last API: Speech recognition for users to easily say find me and be shown on the map
+ * ---------------------------------------------------------------------------------------------
+ * This app detects your IP address and shows your location using Google Maps
  * using
  *  Google Maps API https://developers.google.com/maps/ //Alex
  *  ipinfo API https://ipinfo.io/developers //Alex
  *  Speech recognition. //Sarah
+ *  ^^^ (Works on Chrome. Problems on Firefox. Probably not supported yet: https://caniuse.com/#feat=speech-recognition)
  *  Keypress detection //Sarah
  *  Speech synth //Sarah
 //  *  Language detection //Alex
@@ -20,21 +26,34 @@ document.addEventListener("DOMContentLoaded", function () {
   Main();
 })
 
-// Grabbing the location
 let Url = "https://ipinfo.io/json";
+/** getInfo(url)
+ * Grabbing the location using async method
+ * @param {string} url
+ * @returns a JSON object
+ */
 async function getInfo(url) {
   const response = await fetch(url);
   return await response.json();
 }
 
-// Changing the location
+/** findMe()
+ * The core function
+ * 1. Fetches the location info using ipInfo
+ * 2. Sets the lat and lng AFTER (.then) the call comes back.
+ *  (.loc comes as a string, hence the slicing)
+ * 3. Set the place object.
+ * 4. Center the map on the user.
+ * 5. Set the zoom
+ * 6. Put the marker down. (For some reason didn't do it automatically);
+ * @return {void};
+ */
 function findMe() {
   getInfo(Url)
     .then(ipInfo => {
       ipInfo;
       let lattitude = ipInfo.loc.slice(0, 7);
       let lng = ipInfo.loc.slice(8, 15);
-      map.setZoom(13);
       let place = {
         lat: parseFloat(lattitude),
         lng: parseFloat(lng)
@@ -43,7 +62,8 @@ function findMe() {
         lat: place.lat,
         lng: place.lng
       });
-
+      map.setZoom(13);
+      
       // Making the cursor move to a new location.
       let marker = new google.maps.Marker({
         position: place,
