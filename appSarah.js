@@ -83,3 +83,4 @@ speech.start();
 speech.onspeechend = function (e) {
     speech.stop();
 }
+

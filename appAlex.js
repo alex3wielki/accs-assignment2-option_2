@@ -63,7 +63,7 @@ function findMe() {
         lng: place.lng
       });
       map.setZoom(13);
-      
+
       // Making the cursor move to a new location.
       let marker = new google.maps.Marker({
         position: place,
@@ -95,6 +95,11 @@ function initMap() {
   });
 }
 
+// On click
+document.querySelector("#locate").addEventListener('click', function () {
+  console.log('test');
+  findMe();
+})
 
 /**
  *  Fetching stuff. Does the same thing as getInfo();
