@@ -35,31 +35,32 @@ function findMe() {
       let lattitude = ipInfo.loc.slice(0, 7);
       let lng = ipInfo.loc.slice(8, 15);
       map.setZoom(13);
-      map.setCenter({
-        // I think the console is lost because map.map is a Google maps API property, therefore I get an error
-        lat: parseFloat(lattitude),
-        lng: parseFloat(lng)
-      });
       let place = {
         lat: parseFloat(lattitude),
         lng: parseFloat(lng)
       }
+      map.setCenter({
+        lat: place.lat,
+        lng: place.lng
+      });
+
+      // Making the cursor move to a new location.
       let marker = new google.maps.Marker({
         position: place,
         map: map
       });
-      // map.panTo(curmarker.position);
     });
 }
 
-/**
- * Init map from Google maps
- * //Google maps
+
+/** Google maps
+ * Init map function from Google Maps
  */
 function initMap() {
   var place = {
     lat: -25.363,
     lng: 131.044
+    // Barrie's location
     // lat: 44.4001,
     // lng: -79.666
   };
@@ -77,6 +78,8 @@ function initMap() {
 
 /**
  *  Fetching stuff. Does the same thing as getInfo();
+ *  Making the rest of the API work with this method would require me to rebuild a couple of other functions
+ *    Therefore it's just console.logging()
  */
 // function getInfo() {
 //   fetch(Url) // Call the fetch function passing the url of the API as a parameter
@@ -85,7 +88,7 @@ function initMap() {
 //     }).then(function (data) {
 //       console.log(data);
 //     })
-//     .catch(function () {
-//       // This is where you run code if the server returns any errors
+//     .catch(function (err) {
+//       console.log(err);
 //     });
 // }
