@@ -1,5 +1,8 @@
 /**
  * ---------------------------------Table of Contents-------------------------------------------
+ * 
+ * /////////////////////////////// I WILL ATTEMPT A CONVERSION TO VUE \\\\\\\\\\\\\\\\\\\\\\\\\\
+ * 
  * First API: ipInfo
  * Second API: Google Maps relocation
  * Last API: Language Detection
@@ -14,6 +17,15 @@
  *  Speech synth //Sarah
  *  Language detection //Alex
  */
+
+var app = new Vue({
+  el: '#root',
+  data:{},
+  methods:{},
+  mounted:{}
+})
+
+
 
 //  I am getting lost with functions again so I'll make it look like C++. Maybe it'll help me.
 function Main() {
