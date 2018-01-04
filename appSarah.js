@@ -23,10 +23,10 @@ window.addEventListener('keydown', function (press) {
     // when "l" and "f" is pressed down, function findMe will be called
     if (press.key == "l" || press.key == "L") {
         Speak("Hold on, I am trying to locate you");
-        findMe();
+        appAlex.findMe();
     } else if (press.key == "f" || press.key == "F") {
         Speak("Hold on, I am trying to find you");
-        findMe();
+        appAlex.findMe();
     }
 });
 
@@ -63,13 +63,13 @@ speech.addEventListener("result", e => {
     // Determines if user says one of the key values
     if (transcript == 'find me') {
         Speak("Hold on, I am trying to find you");
-        findMe();
+        appAlex.findMe();
     } else if (transcript == 'locate me') {
         Speak("Hold on, I am trying to locate you");
-        findMe();
+        appAlex.findMe();
     } else if (transcript == 'where am I') {
         Speak("Hold on, I am trying to determine where you are");
-        findMe();
+        appAlex.findMe();
     }
 
 

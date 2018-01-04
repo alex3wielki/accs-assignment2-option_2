@@ -21,24 +21,29 @@
 var appAlex = new Vue({
   el: "#root",
   data: {
-    Url: "https://ipinfo.io/json"
+    Url: "https://ipinfo.io/json",
+    Language: ""
   },
+
   methods: {
     Main: function() {
       // On click
-      document.querySelector("#locate").addEventListener("click", function() {
-        Speak("I'm trying to locate you");
-        findMe();
-      });
+      // document.querySelector("#locate").addEventListener("click", function() {
+      // });
       let langInput = document.getElementById("langDetection");
       langInput.value = "Dzień dobry"; // Presetting the value so the tester does not have to look for other languages
       document
-      //  TODO
+        //  TODO
         .getElementById("langDetectionBtn")
         .addEventListener("click", function(e) {
           e.preventDefault();
-          app.detectLang(langInput.value);
+          appAlex.detectLang(langInput.value);
         });
+    },
+
+    speakAndFind: function() {
+      // Speak("I'm trying to locate you");
+      appAlex.findMe();
     },
 
     /** getInfo(url)
@@ -64,7 +69,7 @@ var appAlex = new Vue({
      */
 
     findMe: function() {
-      getInfo(Url).then(ipInfo => {
+      appAlex.getInfo(appAlex.Url).then(ipInfo => {
         // ipInfo;
         let lattitude = ipInfo.loc.slice(0, 7);
         let lng = ipInfo.loc.slice(8, 15);
@@ -162,8 +167,84 @@ var appAlex = new Vue({
   }
   // ,
   // mounted:{
-    
+
   // }
 });
 
-document.addEventListener("DOMContentLoaded",function(){ app.Main() })
+document.addEventListener("DOMContentLoaded", function() {
+  appAlex.Main();
+});
+// /** Google maps
+//  * Init map function from Google Maps docs
+//  */
+// function initMap() {
+//   var place = {
+//     lat: -25.363,
+//     lng: 131.044
+//     // Barrie's location
+//     // lat: 44.4001,
+//     // lng: -79.666
+//   };
+//   map = new google.maps.Map(document.getElementById("map"), {
+//     // I made it a global so I can use it in out events
+//     zoom: 4,
+//     center: place
+//   });
+//   var marker = new google.maps.Marker({
+//     position: place,
+//     map: map
+//   });
+// }
+
+
+
+
+
+    // var appAlex = new Vue({
+    //   el: "#root",
+    //   methods: {
+    //     /** Google maps
+    //      * Init map function from Google Maps docs
+    //      */
+    //     initMap: function() {
+    //       var place = {
+    //         lat: -25.363,
+    //         lng: 131.044
+    //         // Barrie's location
+    //         // lat: 44.4001,
+    //         // lng: -79.666
+    //       };
+    //       map = new google.maps.Map(document.getElementById("map"), {
+    //         // I made it a global so I can use it in out events
+    //         zoom: 4,
+    //         center: place
+    //       });
+    //       var marker = new google.maps.Marker({
+    //         position: place,
+    //         map: map
+    //       });
+    //     },
+    //     findMe: function() {
+    //       appAlex.getInfo(appAlex.Url).then(ipInfo => {
+    //         // ipInfo;
+    //         let lattitude = ipInfo.loc.slice(0, 7);
+    //         let lng = ipInfo.loc.slice(8, 15);
+    //         let place = {
+    //           lat: parseFloat(lattitude),
+    //           lng: parseFloat(lng)
+    //         };
+    //         map.setCenter({
+    //           lat: place.lat,
+    //           lng: place.lng
+    //         });
+    //         map.setZoom(13);
+
+    //         // Making the cursor move to a new location.
+    //         let marker = new google.maps.Marker({
+    //           position: place,
+    //           map: map
+    //         });
+    //       });
+    //     }
+    //   }
+    // })
