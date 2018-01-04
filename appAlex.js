@@ -28,6 +28,7 @@ function initMap() {
     // lng: -79.666
   };
   map = new google.maps.Map(document.getElementById("map"), {
+    // TODO
     // I made it a global so I can use it in out events
     zoom: 4,
     center: place
