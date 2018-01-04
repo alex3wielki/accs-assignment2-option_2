@@ -18,27 +18,42 @@
  *  Language detection //Alex
  */
 
+var map = null;
+function initMap() {
+  const place = {
+    lat: -25.363,
+    lng: 131.044
+    // Barrie's location
+    // lat: 44.4001,
+    // lng: -79.666
+  };
+  map = new google.maps.Map(document.getElementById("map"), {
+    // I made it a global so I can use it in out events
+    zoom: 4,
+    center: place
+  });
+  const marker = new google.maps.Marker({
+    position: place,
+    map
+  });
+}
+
 var appAlex = new Vue({
   el: "#root",
   data: {
     Url: "https://ipinfo.io/json",
-    Language: ""
+    Language: "",
+    LangInput: "Dzień dobry"
+    //TODO
+    // map: null
   },
-
+  mounted: function() {
+    initMap();
+  },
   methods: {
-    Main: function() {
-      // On click
-      // document.querySelector("#locate").addEventListener("click", function() {
-      // });
-      let langInput = document.getElementById("langDetection");
-      langInput.value = "Dzień dobry"; // Presetting the value so the tester does not have to look for other languages
-      document
-        //  TODO
-        .getElementById("langDetectionBtn")
-        .addEventListener("click", function(e) {
-          e.preventDefault();
-          appAlex.detectLang(langInput.value);
-        });
+    editLangOutput: function(e) {
+      e.preventDefault();
+      appAlex.detectLang(this.LangInput);
     },
 
     speakAndFind: function() {
@@ -87,6 +102,7 @@ var appAlex = new Vue({
         let marker = new google.maps.Marker({
           position: place,
           map: map
+          // map: this.map
         });
       });
     },
@@ -102,14 +118,14 @@ var appAlex = new Vue({
         // lat: 44.4001,
         // lng: -79.666
       };
-      map = new google.maps.Map(document.getElementById("map"), {
-        // I made it a global so I can use it in out events
+      this.map = new google.maps.Map(document.getElementById("map"), {
+        // Left this cause hell no. TODO
         zoom: 4,
         center: place
       });
       var marker = new google.maps.Marker({
         position: place,
-        map: map
+        map: this.map
       });
     },
 
@@ -146,34 +162,28 @@ var appAlex = new Vue({
           return response.json();
         })
         .then(function(data) {
+          appAlex.Language = data.results[0].language_name;
           // TODO
-          document.getElementById("langDetectionResult").textContent =
-            data.results[0].language_name;
         })
         .catch(function(err) {
           console.log(err);
         });
-      // console.log(lang);
-      // return lang;
     }
     // ,
     // detectLang: async function(query) {
-    //   const response = await fetch('http://apilayer.net/api/detect?access_key=abbdb2654186ebd4033601f9ed696a1b&query=' +
-    //     encodeURIComponent(query));
-    //     let data = await response.json();
-    //  TODO
-    //     document.getElementById("langDetectionResult").textContent = data.results[0].language_name;
+    //   const response = await fetch(
+    //     "http://apilayer.net/api/detect?access_key=abbdb2654186ebd4033601f9ed696a1b&query=" +
+    //       encodeURIComponent(query)
+    //   );
+    //   let data = await response.json();
+    //   appAlex.Language = data.results[0].language_name;
     // }
   }
-  // ,
-  // mounted:{
-
-  // }
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-  appAlex.Main();
-});
+// document.addEventListener("DOMContentLoaded", function() {
+//   appAlex.Main();
+// });
 // /** Google maps
 //  * Init map function from Google Maps docs
 //  */
@@ -196,55 +206,51 @@ document.addEventListener("DOMContentLoaded", function() {
 //   });
 // }
 
+// var appAlex = new Vue({
+//   el: "#root",
+//   methods: {
+//     /** Google maps
+//      * Init map function from Google Maps docs
+//      */
+//     initMap: function() {
+//       var place = {
+//         lat: -25.363,
+//         lng: 131.044
+//         // Barrie's location
+//         // lat: 44.4001,
+//         // lng: -79.666
+//       };
+//       map = new google.maps.Map(document.getElementById("map"), {
+//         // I made it a global so I can use it in out events
+//         zoom: 4,
+//         center: place
+//       });
+//       var marker = new google.maps.Marker({
+//         position: place,
+//         map: map
+//       });
+//     },
+//     findMe: function() {
+//       appAlex.getInfo(appAlex.Url).then(ipInfo => {
+//         // ipInfo;
+//         let lattitude = ipInfo.loc.slice(0, 7);
+//         let lng = ipInfo.loc.slice(8, 15);
+//         let place = {
+//           lat: parseFloat(lattitude),
+//           lng: parseFloat(lng)
+//         };
+//         map.setCenter({
+//           lat: place.lat,
+//           lng: place.lng
+//         });
+//         map.setZoom(13);
 
-
-
-
-    // var appAlex = new Vue({
-    //   el: "#root",
-    //   methods: {
-    //     /** Google maps
-    //      * Init map function from Google Maps docs
-    //      */
-    //     initMap: function() {
-    //       var place = {
-    //         lat: -25.363,
-    //         lng: 131.044
-    //         // Barrie's location
-    //         // lat: 44.4001,
-    //         // lng: -79.666
-    //       };
-    //       map = new google.maps.Map(document.getElementById("map"), {
-    //         // I made it a global so I can use it in out events
-    //         zoom: 4,
-    //         center: place
-    //       });
-    //       var marker = new google.maps.Marker({
-    //         position: place,
-    //         map: map
-    //       });
-    //     },
-    //     findMe: function() {
-    //       appAlex.getInfo(appAlex.Url).then(ipInfo => {
-    //         // ipInfo;
-    //         let lattitude = ipInfo.loc.slice(0, 7);
-    //         let lng = ipInfo.loc.slice(8, 15);
-    //         let place = {
-    //           lat: parseFloat(lattitude),
-    //           lng: parseFloat(lng)
-    //         };
-    //         map.setCenter({
-    //           lat: place.lat,
-    //           lng: place.lng
-    //         });
-    //         map.setZoom(13);
-
-    //         // Making the cursor move to a new location.
-    //         let marker = new google.maps.Marker({
-    //           position: place,
-    //           map: map
-    //         });
-    //       });
-    //     }
-    //   }
-    // })
+//         // Making the cursor move to a new location.
+//         let marker = new google.maps.Marker({
+//           position: place,
+//           map: map
+//         });
+//       });
+//     }
+//   }
+// })
