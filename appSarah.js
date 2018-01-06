@@ -29,7 +29,14 @@ window.addEventListener('keydown', function (press) {
         appAlex.findMe();
     }
 });
-
+// I do not know what I am doing omg
+    // function keydown() {
+    //     const press = {
+    //      key = "l",
+    //      key2 = "L",
+            
+    //     }
+    // }
 /** SECOND: Function for Speech Synthesis
  * A function which lets us just say stuff and save code
  * 
