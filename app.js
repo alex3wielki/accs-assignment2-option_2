@@ -179,7 +179,7 @@ var app = new Vue({
     //   app.Language = data.results[0].language_name;
     // },
 
-    // Sarah's part
+// ******************************  Sarah's Code *********************************
     addKeyDetection: function() {
       // ----------------FIRST: Function for key detection----------------
       window.addEventListener("keydown", function(press) {
@@ -194,6 +194,7 @@ var app = new Vue({
         }
       });
     },
+
     // ----------------SECOND: Function for speech synthesis----------------
     // A function which lets you say stuff and save code
     // @param {string} whatToSay
@@ -208,6 +209,7 @@ var app = new Vue({
     },
     setupSpeech: function() {
       console.log("speech");
+
       // ----------------LAST: Function for Speech Recognition----------------
       // creating a function that listens
       // set up the speech regcognition
@@ -216,11 +218,11 @@ var app = new Vue({
 
       const speech = new SpeechRecognition();
       speech.interimResults = false; // THIS WAS CAUSING AN ENDLESS LOOP.
-      speech.lang = "en-US"; // maybe don't need this?
+      speech.lang = "en-US"; 
       speech.continuous = false; //sets a single result for the one recogonition. Evil
       // speech.maxAlternatives = 1; // sets the number of potential matches that should be returned
 
-      // setting a event to listen for the words find me
+      // Setting a event to listen for the speech "find "me"
       speech.addEventListener("result", e => {
         const transcript = e.results[0][0].transcript;
         // Determines if user says one of the key values
